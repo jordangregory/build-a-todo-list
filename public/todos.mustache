@@ -16,7 +16,7 @@
 		<input type="submit" value="Add Todo">
 		<ul class="listItems">
 			{{#todos}}
-			<li class="todoList"> <input class="getRid" type="button" value="Mark Complete">{{.}}</li>
+			<li class="todoList"> <input class="getRid" type="checkbox" value="Mark Complete"><span>{{.}}</span></li>
 			<br> {{/todos}}
 		</ul>
 

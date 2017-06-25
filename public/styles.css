@@ -5,3 +5,7 @@ body {
 .listItems {
   list-style-type: none;
 }
+
+.getRid:checked + span {
+  text-decoration: line-through;
+}
