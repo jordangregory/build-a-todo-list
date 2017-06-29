@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mustacheExpress = require("mustache-express");
+const models = require("./models");
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -22,15 +23,50 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", express.static("./public")); //Used to "serve them up" for other files such as CSS or another JS
 
+// query data base through todos model and get all todo record
+// render the todos page with the found todos
 app.get("/", function(req, res) {
-  //Requests the data from the server to be rendered for this "path/"
-  res.render("todos", { todos: todos });
+  models.todos.findAll().then(function(todos) {
+    res.render("todos", {
+      todos: todos
+    });
+  });
 });
 
 app.post("/", function(req, res) {
-  //Sending data to the server, runs through middleware first, and then server interprets the data and then does whatever you tell it to do
-  todos.push(req.body.searchInput); //Take this data and push it to my array
-  res.redirect("/");
+  var todo = req.body.searchInput;
+  var newTodo = models.todos.build({ chore: todo });
+  newTodo
+    .save()
+    .then(function(saved) {
+      todos.push(req.body.searchInput); //Take this data and push it to my array
+      res.redirect("/");
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
+});
+
+app.get("/todos/:id", function(req, res) {
+  models.todos
+    .findById(req.params.id)
+    .then(function(foundUser) {
+      res.send(foundUser);
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
+});
+
+app.delete("/todos/:id", function(req, res) {
+  models.todos
+    .destroy({ where: { id: req.params.id } })
+    .then(function(deletedUser) {
+      res.send(deletedUser);
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
 });
 
 app.listen(port, function() {

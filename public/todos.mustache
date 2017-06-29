@@ -12,11 +12,11 @@
 <body>
 
 	<form action="/" method="post">
-		<input type="text" name="searchInput">
-		<input type="submit" value="Add Todo">
+		<input type="text" name="searchInput"/>
+		<input type="submit" value="Add Todo"/>
 		<ul class="listItems">
 			{{#todos}}
-			<li class="todoList"> <input class="getRid" type="checkbox" value="Mark Complete"><span>{{.}}</span></li>
+			<li class="todoList"> <input class="getRid" type="checkbox" value="Mark Complete"><span>{{chore}}</span></li>
 			<br> {{/todos}}
 		</ul>
 
