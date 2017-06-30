@@ -48,21 +48,21 @@ app.post("/", function(req, res) {
 });
 
 app.get("/todos/:id", function(req, res) {
-  models.todos
+  models.todo
     .findById(req.params.id)
-    .then(function(foundUser) {
-      res.send(foundUser);
+    .then(function(foundTodo) {
+      res.send(foundTodo);
     })
     .catch(function(err) {
       res.status(500).send(err);
     });
 });
 
-app.delete("/todos/:id", function(req, res) {
-  models.todos
+app.post("/todos/:id", function(req, res) {
+  models.todo
     .destroy({ where: { id: req.params.id } })
-    .then(function(deletedUser) {
-      res.send(deletedUser);
+    .then(function(deletedTodo) {
+      res.send(deletedTodo);
     })
     .catch(function(err) {
       res.status(500).send(err);

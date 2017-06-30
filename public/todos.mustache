@@ -10,18 +10,19 @@
 </head>
 
 <body>
+	<div class="listForm">
+		<h1> THINGS TO DO: </h1>
+		<form action="/" method="post">
+			<input type="text" name="searchInput" />
+			<input type="submit" value="Add Todo" />
 
-	<form action="/" method="post">
-		<input type="text" name="searchInput"/>
-		<input type="submit" value="Add Todo"/>
-		<ul class="listItems">
-			{{#todos}}
-			<li class="todoList"> <input class="getRid" type="checkbox" value="Mark Complete"><span>{{chore}}</span></li>
-			<br> {{/todos}}
-		</ul>
-
-		
-	</form>
+			<ul class="listItems">
+				{{#todos}}
+				<li class="todoList"> <input class="getRid" type="checkbox" value="Mark Complete"><span>{{chore}}</span></li>
+				<br> {{/todos}}
+			</ul>
+		</form>
+	</div>
 
 </body>
 
